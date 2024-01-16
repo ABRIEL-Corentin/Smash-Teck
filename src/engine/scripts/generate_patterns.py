@@ -110,20 +110,6 @@ def write_macros(file):
     file.write(f"\t\t\treturn reinterpret_cast<void *>(function); \\\n")
     file.write(f"\t}} \\\n")
 
-    file.write(f"\n#define CHECK_EXTRACT_COMPONENT(type) \\\n")
-    file.write(f"\t{{ \\\n")
-    file.write(f"\t\tJson::Value value = ecs::World::getInstance().extractComponentData<type>(entity); \\\n")
-    file.write(f"\t\tif (value != Json::nullValue) \\\n")
-    file.write(f"\t\t\tcomponents.append(value); \\\n")
-    file.write(f"\t}} \\\n")
-
-    file.write(f"\n#define CHECK_EXTRACT_SYSTEM(type) \\\n")
-    file.write(f"\t{{ \\\n")
-    file.write(f"\t\tJson::Value value = ecs::World::getInstance().extractSystemData(type); \\\n")
-    file.write(f"\t\tif (value != Json::nullValue) \\\n")
-    file.write(f"\t\t\tsystems.append(value); \\\n")
-    file.write(f"\t}} \\\n")
-
 # write add component patterns into file
 def write_add_components_stream(file):
     file.write(f"\tbool addComponentPattern(ecs::World &world, ecs::Entity entity, const std::string &type, std::istream &data)\n")
@@ -136,20 +122,6 @@ def write_add_components_stream(file):
         file.write(f"\t\t((void)world);\n")
         file.write(f"\t\t((void)entity);\n")
         file.write(f"\t\t((void)data);\n")
-
-    file.write(f"\t\treturn false;\n")
-    file.write(f"\t}}\n")
-
-def write_add_components_json(file):
-    file.write(f"\tbool addComponentPattern(ecs::World &world, ecs::Entity entity, const std::string &type, Json::Value &value)\n")
-    file.write(f"\t{{\n")
-
-    if len(components):
-        for component in components:
-            file.write(f"\t\tCHECK_ADD_COMPONENT_JSON(\"{component}\", type, {component}, value);\n")
-    else:
-        file.write(f"\t\t((void)world);\n")
-        file.write(f"\t\t((void)entity);\n")
 
     file.write(f"\t\treturn false;\n")
     file.write(f"\t}}\n")
@@ -225,30 +197,6 @@ def write_get_function_ptr(file):
     file.write(f"\t\treturn nullptr;\n")
     file.write(f"\t}}\n")
 
-def write_extract_entity_data(file):
-    file.write(f"\tstd::string extractEntityData(ecs::Entity entity)\n")
-    file.write(f"\t{{\n")
-
-    file.write(f"\t\tJson::Value root = Json::Value();\n")
-    file.write(f"\t\tJson::Value components = Json::Value(Json::arrayValue);\n")
-    file.write(f"\t\tJson::Value systems = Json::Value(Json::arrayValue);\n\n")
-    file.write(f"\t\tJson::FastWriter writer = Json::FastWriter();\n\n")
-
-    if len(components) and len(systems):
-        for component in components:
-            file.write(f"\t\tCHECK_EXTRACT_COMPONENT({component});\n")
-
-        file.write(f"\n")
-        for system in systems:
-            file.write(f"\t\tCHECK_EXTRACT_SYSTEM({system});\n")
-    else:
-        file.write(f"\t\t((void)entity);\n")
-
-    file.write(f"\n\t\troot[\"components\"] = components;\n")
-    file.write(f"\t\troot[\"systems\"] = systems;\n")
-    file.write(f"\t\treturn writer.write(root);\n")
-    file.write(f"\t}}\n")
-
 # generate patterns file
 with open(OUTPUT_FILE, "w") as file:
 
@@ -264,8 +212,6 @@ with open(OUTPUT_FILE, "w") as file:
 
     write_add_components_stream(file)
     file.write("\n")
-    write_add_components_json(file)
-    file.write("\n")
     write_remove_components(file)
     file.write("\n")
     write_add_systems(file)
@@ -275,7 +221,5 @@ with open(OUTPUT_FILE, "w") as file:
     write_destroy_entity(file)
     file.write("\n")
     write_get_function_ptr(file)
-    file.write("\n")
-    write_extract_entity_data(file)
 
     file.write(f"}}\n")

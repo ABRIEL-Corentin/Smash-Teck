@@ -39,11 +39,6 @@ namespace engine::ecs
         return std::find(m_available_entities.begin(), m_available_entities.end(), entity) == m_available_entities.end();
     }
 
-    void World::requestRestoreEntityData(const std::string &data, RestoreEntityCallback callback)
-    {
-        m_request_restore_entity_data.push_back({data, callback});
-    }
-
     void World::destroyEntity(const Entity &entity, DestroyEntityCallback callback)
     {
         #if DEBUG_DISPLAY_DESTROY_ENTITY
@@ -63,7 +58,6 @@ namespace engine::ecs
             m_request_remove_components.clear();
             m_request_remove_systems.clear();
             m_request_destroy_entities.clear();
-            m_request_restore_entity_data.clear();
             m_clear = false;
         }
         for (auto component = m_request_remove_components.begin(); component != m_request_remove_components.end(); ++component)
@@ -81,13 +75,9 @@ namespace engine::ecs
             }
         }
 
-        for (auto request = m_request_restore_entity_data.begin(); request != m_request_restore_entity_data.end(); ++request)
-            restoreEntityData(request->first, request->second);
-
         m_request_remove_components.clear();
         m_request_remove_systems.clear();
         m_request_destroy_entities.clear();
-        m_request_restore_entity_data.clear();
     }
 
     void World::clear()
@@ -140,41 +130,5 @@ namespace engine::ecs
     void World::clearSystems()
     {
         m_systems.clear();
-    }
-
-    Json::Value World::extractSystemData(System system)
-    {
-        if (hasSystem(system))
-            return Json::Value(functionName(reinterpret_cast<void *>(system)));
-        return Json::nullValue;
-    }
-
-    void World::restoreEntityData(const std::string &data, RestoreEntityCallback callback)
-    {
-        Json::Reader reader = Json::Reader();
-        Json::Value root = Json::Value();
-        Json::Value components = Json::Value();
-        Json::Value systems = Json::Value();
-        ecs::Entity entity;
-
-        if (!reader.parse(data, root)) {
-            std::cerr << "Failed to load data for entity " << ":" << std::endl;
-            std::cerr << data << std::endl;
-            return;
-        }
-
-        entity = createEntity();
-
-        components = root["components"];
-        systems = root["systems"];
-
-        for (auto component = components.begin(); component != components.end(); ++component)
-            if (!addComponentPattern(*this, entity, (*component)["name"].asString(), *component))
-                std::cerr << "Failed to add component '" << (*component)["name"].asString() << std::endl;
-
-        for (auto system = systems.begin(); system != systems.end(); ++system)
-            addSystemPattern(*this, system->asString());
-        if (callback)
-            callback(entity);
     }
 }

@@ -1,1 +1,2 @@
-SYSTEM render::renderWindow
+SYSTEM render::windowManager
+SYSTEM render::fpsDisplay

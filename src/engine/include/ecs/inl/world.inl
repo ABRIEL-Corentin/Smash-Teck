@@ -22,23 +22,6 @@ namespace engine::ecs
     }
 
     template<typename T>
-    Json::Value World::extractComponentData(const Entity &entity)
-    {
-        Components<T> &components = getComponents<T>();
-        Json::Value value = Json::Value();
-
-        if (components.size() <= entity || components.at(entity) == std::nullopt)
-            return Json::nullValue;
-
-        if constexpr (HasExtractData<T>) {
-            value["name"] = typeName<T>();
-            components.at(entity).value().extractData(value);
-            return value;
-        }
-        return Json::nullValue;
-    }
-
-    template<typename T>
     Components<T> &World::getComponents()
     {
         auto components = m_components.find(std::type_index(typeid(T)));

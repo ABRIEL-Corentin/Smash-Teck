@@ -80,8 +80,6 @@ namespace engine
             else if (line == "ENTITY") {
                 entity = m_world.createEntity();
                 entities.push_back(entity);
-                continue;
-            } else if (line == "COMPONENTS") {
                 is_components = true;
                 continue;
             } else if (line == "SYSTEM") {
@@ -99,6 +97,7 @@ namespace engine
                 std::string file = args.front();
                 args.erase(args.begin());
                 ecs::Entities loaded_entities = loadScene(file, args);
+                is_components = false;
 
                 for (auto it = loaded_entities.begin(); it != loaded_entities.end(); ++it)
                     entities.push_back(*it);

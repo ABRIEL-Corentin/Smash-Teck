@@ -1,10 +1,42 @@
 {
     "components": [
+        {
+            "name": "render::Animation",
+            "path": "include/components/animation.hpp"
+        },
+        {
+            "name": "render::Shape",
+            "path": "include/components/shape.hpp"
+        },
+        {
+            "name": "render::Text",
+            "path": "include/components/text.hpp"
+        },
+        {
+            "name": "render::Sound",
+            "path": "include/components/sound.hpp"
+        }
     ],
     "systems": [
         {
-            "name": "render::renderWindow",
-            "path": "include/systems/render_window.hpp"
+            "name": "render::animationPlayer",
+            "path": "include/systems/animation.hpp"
+        },
+        {
+            "name": "render::renderShape",
+            "path": "include/systems/render_shape.hpp"
+        },
+        {
+            "name": "render::windowManager",
+            "path": "include/systems/window_manager.hpp"
+        },
+        {
+            "name": "render::renderText",
+            "path": "include/systems/render_text.hpp"
+        },
+        {
+            "name": "render::fpsDisplay",
+            "path": "include/systems/fps_display.hpp"
         }
     ]
 }

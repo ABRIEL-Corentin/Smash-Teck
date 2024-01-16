@@ -37,14 +37,9 @@ namespace engine::ecs
             void requestRemoveSystem(const System &system);
             bool hasSystem(const System &system) const;
             void clearSystems();
-            Json::Value extractSystemData(System system);
-            void requestRestoreEntityData(const std::string &data, RestoreEntityCallback callback = nullptr);
 
             template<typename T>
             Component<T> &getComponent(const Entity &entity);
-
-            template<typename T>
-            Json::Value extractComponentData(const Entity &entity);
 
             template<typename T>
             Components<T> &getComponents();
@@ -72,12 +67,10 @@ namespace engine::ecs
             Systems m_systems;
             RemoveDataContainer m_request_remove_components;
             Systems m_request_remove_systems;
-            RequestRestoreEntities m_request_restore_entity_data;
             RequestDestroyEntities m_request_destroy_entities;
             bool m_clear;
 
             bool removeSystem(const System &system);
-            void restoreEntityData(const std::string &data, RestoreEntityCallback callback);
 
             template<typename T>
             bool removeComponent(const Entity &entity);
