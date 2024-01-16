@@ -2,8 +2,8 @@ add_library(
     render
     SHARED
 
-    src/empty.cpp
-    src/systems/test_system.cpp
+    src/window.cpp
+    src/systems/render_window.cpp
 )
 
 target_include_directories(

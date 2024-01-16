@@ -1,11 +1,10 @@
 {
     "components": [
-
     ],
     "systems": [
         {
-            "name": "testSystem",
-            "path": "include/systems/test_system.hpp"
+            "name": "render::renderWindow",
+            "path": "include/systems/render_window.hpp"
         }
     ]
 }

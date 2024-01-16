@@ -2,10 +2,13 @@
 //
 //  Created on Tue Jan 16 2024
 //
-//  test_system.hpp
+//  render_window.hpp
 //
 ////////////////////////
 
 #pragma once
 
-void testSystem();
+namespace render
+{
+    void renderWindow();
+}

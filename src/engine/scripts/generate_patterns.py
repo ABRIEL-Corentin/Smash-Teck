@@ -119,7 +119,7 @@ def write_macros(file):
 
     file.write(f"\n#define CHECK_EXTRACT_SYSTEM(type) \\\n")
     file.write(f"\t{{ \\\n")
-    file.write(f"\t\tJson::Value value = ecs::World::getInstance().extractSystemData(entity, type); \\\n")
+    file.write(f"\t\tJson::Value value = ecs::World::getInstance().extractSystemData(type); \\\n")
     file.write(f"\t\tif (value != Json::nullValue) \\\n")
     file.write(f"\t\t\tsystems.append(value); \\\n")
     file.write(f"\t}} \\\n")
