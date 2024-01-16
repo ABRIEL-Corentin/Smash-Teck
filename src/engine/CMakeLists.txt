@@ -19,6 +19,7 @@ target_include_directories(
 target_link_libraries(
 	smash-teck
 
+    render
     jsoncpp
     muparser
     dl
@@ -31,6 +32,7 @@ add_custom_command(
     python3 scripts/generate_patterns.py "src/patterns.cpp" server drm_server
 
     DEPENDS
+    ../modules/render/module.json
     scripts/generate_patterns.py
 
     WORKING_DIRECTORY

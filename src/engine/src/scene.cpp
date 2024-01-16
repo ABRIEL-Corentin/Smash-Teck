@@ -84,7 +84,7 @@ namespace engine
             } else if (line == "COMPONENTS") {
                 is_components = true;
                 continue;
-            } else if (line == "SYSTEMS") {
+            } else if (line == "SYSTEM") {
                 is_components = false;
                 continue;
             }
@@ -119,9 +119,17 @@ namespace engine
                     return entities;
                 }
             } else {
-                std::string system_name = trimString(line.substr(0, line.find(' ')));
+                std::vector<std::string> args = splitStr(line.substr(line.find(' ') + 1, line.size() - line.find(' ')));
 
-                if (!addSystemPattern(m_world, entity, system_name)) {
+                if (args.size() != 1) {
+                    std::cout << "Failed to load scene:" << std::endl;
+                    std::cout << "Failed to extract system name at line " << line_index << " on file " << file_name << std::endl;
+                    return entities;
+                }
+
+                std::string system_name = args[0];
+
+                if (!addSystemPattern(m_world, system_name)) {
                     std::cout << "Failed to load scene:" << std::endl;
                     std::cout << "Failed to add system '" << system_name << "' at line " << line_index << " on file " << file_name << " for entity " << entity << std::endl;
                     Application::getInstance().close();

@@ -21,7 +21,6 @@ namespace engine::ecs
             return entity;
         }
 
-        // m_systems.push_back(Systems());
         return m_current_entity++;
     }
 
@@ -98,20 +97,14 @@ namespace engine::ecs
 
     void World::launchSystems()
     {
-        // Entity entity = 0;
-
         for (auto system = m_systems.begin(); system != m_systems.end(); ++system)
             (*system)();
-        // for (auto systems = m_systems.begin(); systems != m_systems.end(); ++systems) {
-        //     for (auto system = systems->begin(); system != systems->end(); ++system)
-        //         (*system)(entity);
-        //     ++entity;
-        // }
     }
 
     void World::addSystem(const System &system)
     {
-        m_systems.push_back(system);
+        if (!hasSystem(system))
+            m_systems.push_back(system);
     }
 
     bool World::removeSystem(const System &system)
@@ -180,7 +173,7 @@ namespace engine::ecs
                 std::cerr << "Failed to add component '" << (*component)["name"].asString() << std::endl;
 
         for (auto system = systems.begin(); system != systems.end(); ++system)
-            addSystemPattern(*this, entity, system->asString());
+            addSystemPattern(*this, system->asString());
         if (callback)
             callback(entity);
     }

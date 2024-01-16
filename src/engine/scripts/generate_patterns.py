@@ -92,14 +92,15 @@ def write_macros(file):
     file.write(f"\n#define CHECK_ADD_SYSTEM(type_str, input, type) \\\n")
     file.write(f"\t{{ \\\n")
     file.write(f"\t\tif (type_str == input) {{ \\\n")
-    file.write(f"\t\t\treturn world.addSystem(entity, type); \\\n")
+    file.write(f"\t\t\tworld.addSystem(type); \\\n")
+    file.write(f"\t\t\treturn true; \\\n")
     file.write(f"\t\t}} \\\n")
     file.write(f"\t}} \\\n")
 
     file.write(f"\n#define CHECK_REMOVE_SYSTEM(type_str, input, type) \\\n")
     file.write(f"\t{{ \\\n")
     file.write(f"\t\tif (type_str == input) {{ \\\n")
-    file.write(f"\t\t\treturn world.removeSystem(entity, type); \\\n")
+    file.write(f"\t\t\treturn world.removeSystem(type); \\\n")
     file.write(f"\t\t}} \\\n")
     file.write(f"\t}} \\\n")
 
@@ -170,7 +171,7 @@ def write_remove_components(file):
 
 # write systems patterns into file
 def write_add_systems(file):
-    file.write(f"\tbool addSystemPattern(ecs::World &world, ecs::Entity entity, const std::string &system)\n")
+    file.write(f"\tbool addSystemPattern(ecs::World &world, const std::string &system)\n")
     file.write(f"\t{{\n")
 
     if len(systems):
@@ -178,14 +179,13 @@ def write_add_systems(file):
             file.write(f"\t\tCHECK_ADD_SYSTEM(\"{system}\", system, {system})\n")
     else:
         file.write(f"\t\t((void)world);\n")
-        file.write(f"\t\t((void)entity);\n")
         file.write(f"\t\t((void)system);\n")
 
     file.write(f"\t\treturn false;\n")
     file.write(f"\t}}\n")
 
 def write_remove_systems(file):
-    file.write(f"\tbool removeSystemPattern(ecs::World &world, ecs::Entity entity, const std::string &system)\n")
+    file.write(f"\tbool removeSystemPattern(ecs::World &world, const std::string &system)\n")
     file.write(f"\t{{\n")
 
     if len(systems):
@@ -193,7 +193,6 @@ def write_remove_systems(file):
             file.write(f"\t\tCHECK_REMOVE_SYSTEM(\"{system}\", system, {system})\n")
     else:
         file.write(f"\t\t((void)world);\n")
-        file.write(f"\t\t((void)entity);\n")
         file.write(f"\t\t((void)system);\n")
 
     file.write(f"\t\treturn false;\n")

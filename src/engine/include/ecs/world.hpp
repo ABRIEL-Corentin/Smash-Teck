@@ -62,7 +62,7 @@ namespace engine::ecs
             void registerComponent();
 
             friend bool ::engine::removeComponentPattern(ecs::World &world, ecs::Entity entity, const std::string &type);
-            friend bool ::engine::removeSystemPattern(ecs::World &world, ecs::Entity entity, const std::string &system);
+            friend bool ::engine::removeSystemPattern(ecs::World &world, const std::string &system);
             friend void ::engine::destroyEntityPattern(ecs::World &world, ecs::Entity entity);
 
         private:

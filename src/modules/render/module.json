@@ -1,0 +1,11 @@
+{
+    "components": [
+
+    ],
+    "systems": [
+        {
+            "name": "testSystem",
+            "path": "include/systems/test_system.hpp"
+        }
+    ]
+}
