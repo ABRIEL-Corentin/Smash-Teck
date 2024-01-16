@@ -211,7 +211,6 @@ def write_destroy_entity(file):
         file.write(f"\t\t((void)world);\n")
         file.write(f"\t\t((void)entity);\n")
 
-    file.write(f"\t\tworld.clearSystems(entity);\n")
     file.write(f"\t}}\n")
 
 def write_get_function_ptr(file):

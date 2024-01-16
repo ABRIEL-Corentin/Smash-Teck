@@ -24,9 +24,8 @@ namespace engine::ecs
     using Entities = std::vector<Entity>;
     using ComponentsContainer = std::unordered_map<std::type_index, std::any>;
     using RemoveDataContainer = std::vector<std::pair<Entity, std::string>>;
-    using System = void (*)(const Entity &);
+    using System = void (*)();
     using Systems = std::vector<System>;
-    using SystemsContainer = std::vector<Systems>;
     using DestroyEntityCallback = void (*)(const Entity &);
     using RestoreEntityCallback = void (*)(const Entity &);
     using RequestRestoreEntities = std::vector<std::pair<std::string, RestoreEntityCallback>>;

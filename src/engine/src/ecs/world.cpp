@@ -21,7 +21,7 @@ namespace engine::ecs
             return entity;
         }
 
-        m_systems.push_back(Systems());
+        // m_systems.push_back(Systems());
         return m_current_entity++;
     }
 
@@ -71,7 +71,7 @@ namespace engine::ecs
             removeComponentPattern(*this, component->first, component->second);
 
         for (auto system = m_request_remove_systems.begin(); system != m_request_remove_systems.end(); ++system)
-            removeSystemPattern(*this, system->first, system->second);
+            removeSystem(*system);
 
         for (auto entity = m_request_destroy_entities.begin(); entity != m_request_destroy_entities.end(); ++entity) {
             if (std::find(m_available_entities.begin(), m_available_entities.end(), entity->first) == m_available_entities.end()) {
@@ -98,65 +98,60 @@ namespace engine::ecs
 
     void World::launchSystems()
     {
-        Entity entity = 0;
+        // Entity entity = 0;
 
-        for (auto systems = m_systems.begin(); systems != m_systems.end(); ++systems) {
-            for (auto system = systems->begin(); system != systems->end(); ++system)
-                (*system)(entity);
-            ++entity;
-        }
+        for (auto system = m_systems.begin(); system != m_systems.end(); ++system)
+            (*system)();
+        // for (auto systems = m_systems.begin(); systems != m_systems.end(); ++systems) {
+        //     for (auto system = systems->begin(); system != systems->end(); ++system)
+        //         (*system)(entity);
+        //     ++entity;
+        // }
     }
 
-    bool World::addSystem(const Entity &entity, const System &system)
+    void World::addSystem(const System &system)
     {
-        if (m_systems.size() <= entity || !system)
-            return false;
-
-        m_systems.at(entity).push_back(system);
-        return true;
+        m_systems.push_back(system);
     }
 
-    bool World::removeSystem(const Entity &entity, const System &system)
+    bool World::removeSystem(const System &system)
     {
-        if (m_systems.size() <= entity || !system)
+        if (!system)
             return false;
 
-        for (auto it = m_systems.at(entity).begin(); it != m_systems.at(entity).end(); ++it) {
+        for (auto it = m_systems.begin(); it != m_systems.end(); ++it) {
             if (*it == system) {
-                m_systems.at(entity).erase(it);
+                m_systems.erase(it);
                 return true;
             }
         }
         return false;
     }
 
-    void World::requestRemoveSystem(const Entity &entity, const System &system)
+    void World::requestRemoveSystem(const System &system)
     {
-        m_request_remove_systems.push_back({entity, functionName(reinterpret_cast<void *>(system))});
+        m_request_remove_systems.push_back(system);
     }
 
-    bool World::hasSystem(const Entity &entity, const System &system) const
+    bool World::hasSystem(const System &system) const
     {
-        if (m_systems.size() <= entity || !system)
+        if (!system)
             return false;
 
-        for (auto it = m_systems.at(entity).begin(); it != m_systems.at(entity).end(); ++it)
+        for (auto it = m_systems.begin(); it != m_systems.end(); ++it)
             if (*it == system)
                 return true;
         return false;
     }
 
-    void World::clearSystems(const Entity &entity)
+    void World::clearSystems()
     {
-        if (m_systems.size() <= entity)
-            return;
-
-        m_systems.at(entity).clear();
+        m_systems.clear();
     }
 
-    Json::Value World::extractSystemData(const Entity &entity, System system)
+    Json::Value World::extractSystemData(System system)
     {
-        if (hasSystem(entity, system))
+        if (hasSystem(system))
             return Json::Value(functionName(reinterpret_cast<void *>(system)));
         return Json::nullValue;
     }
