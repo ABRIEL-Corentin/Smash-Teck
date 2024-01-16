@@ -1,0 +1,6 @@
+SYSTEM game::playerMovement
+SYSTEM render::renderShape
+
+ENTITY
+    game::Player
+    render::Shape blank 100 100 100 100 0

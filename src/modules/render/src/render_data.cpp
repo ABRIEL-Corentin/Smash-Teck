@@ -666,7 +666,9 @@ namespace render
     }
 
     void RenderData::loadResources()
-    { }
+    {
+        loadTexture("blank", "./source/blank.png");
+    }
 
     void RenderData::loadAnimateTexture(const std::string &name, const std::string &file_name, const sf::Vector2i &nbr_of_sprite, const sf::Vector2i &position, const sf::Vector2i &size)
     {

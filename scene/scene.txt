@@ -1,2 +1,14 @@
 SYSTEM render::windowManager
-SYSTEM render::fpsDisplay
+# SYSTEM render::fpsDisplay
+
+LOAD_SCENE scene/player.txt
+
+# ------------------ DEBUG ------------------ #
+
+SYSTEM game::DisplayEntitiesMemory
+
+ENTITY
+    game::DisplayEntitiesMemoryContainer 10
+
+
+# ------------------ DEBUG ------------------ #

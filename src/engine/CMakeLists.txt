@@ -20,6 +20,7 @@ target_link_libraries(
 	smash-teck
 
     render
+    game
     jsoncpp
     muparser
     dl
@@ -33,6 +34,7 @@ add_custom_command(
 
     DEPENDS
     ../modules/render/module.json
+    ../modules/game/module.json
     scripts/generate_patterns.py
 
     WORKING_DIRECTORY

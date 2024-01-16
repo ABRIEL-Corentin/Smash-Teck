@@ -1,0 +1,22 @@
+{
+    "components": [
+        {
+            "name": "game::Player",
+            "path": "include/components/player.hpp"
+        },
+        {
+            "name": "game::DisplayEntitiesMemoryContainer",
+            "path": "include/components/display_memory.hpp"
+        }
+    ],
+    "systems": [
+        {
+            "name": "game::playerMovement",
+            "path": "include/systems/player_movement.hpp"
+        },
+        {
+            "name": "game::DisplayEntitiesMemory",
+            "path": "include/systems/display_memory.hpp"
+        }
+    ]
+}
