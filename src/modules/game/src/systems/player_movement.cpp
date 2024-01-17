@@ -66,13 +66,16 @@ namespace game
             if (render::Keyboard::isKeyPressed(render::Keyboard::Key::D))
                 offset.x = player.horizontal_speed;
 
-            if (render::Keyboard::isKeyPressedAsButton(render::Keyboard::Space))
+            if (render::Keyboard::isKeyPressedAsButton(render::Keyboard::Space) && (player.double_jump || player.is_grounded)) {
                 player.vertical_velocity = -JUMP_FORCE;
+                player.double_jump = player.is_grounded;
+            }
 
             offset.y = player.vertical_velocity;
             shape.move(offset * render::Time::getInstance().getDeltaTime());
             move_player_parts(tag.tag, offset * render::Time::getInstance().getDeltaTime(), tags, shapes);
             player.vertical_velocity += GRAVITY * render::Time::getInstance().getDeltaTime();
+            player.is_grounded = false;
         }
     }
 }

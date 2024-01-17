@@ -18,6 +18,8 @@ namespace game
         : horizontal_speed(750)
         , vertical_velocity(0)
         , entity(entity)
+        , double_jump(true)
+        , is_grounded(false)
     { }
 
     void Player::move_to_position(const render::math::Vector2f &position)

@@ -26,6 +26,8 @@ namespace game
                 continue;
 
             players.at(i)->vertical_velocity = 0;
+            players.at(i)->is_grounded = true;
+            players.at(i)->double_jump = true;
             players.at(i)->move_to_position({
                 shapes.at(i)->getPosition().x,
                 other_shape.getPosition().y - other_shape.getSize().y / 2 - shapes.at(i)->getSize().y / 2
