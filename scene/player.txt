@@ -4,6 +4,12 @@ SYSTEM render::animationPlayer
 
 ENTITY
     game::Player
-    render::Shape piranha_plant_idle_1 ${0} ${1} 200 200 0
+    game::Tag PLAYER${0}
+    render::Shape piranha_plant_idle_1 ${1} ${2} 200 200 0
     render::Animation piranha_plant_idle 10
-    render::CollisionBox game::onCollisionEnter game::onCollisionExit game::onCollisionStay
+    # render::CollisionBox None None game::onPlayerCollisionStay
+
+ENTITY
+    game::Tag PLAYER${0}_PART
+    render::Shape blank ${1} (${2} + 95) 50 10 0
+    render::CollisionBox None None game::onPlayerCollisionStay

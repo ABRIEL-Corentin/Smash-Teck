@@ -55,40 +55,5 @@ namespace game
             std::cout << "Entities: " << used_entities << "/" << last_entity << std::endl;
             container->value().last_nb_line = nb_line + 1;
         }
-
-        // if (!container.has_value())
-        //     return;
-
-        // container->timer += render::Time::getInstance().getDeltaTime();
-
-        // if (container->timer <= 0.05f)
-        //     return;
-
-        // container->timer = 0;
-        // nb_line = nb_line / container->width + (last_entity % container->width != 0);
-
-        // for (std::size_t i = 0; i < container->last_nb_line; ++i)
-        //     std::cout << container->line_up << container->line_clear;
-        // std::cout << std::flush;
-
-        // for (std::size_t y = 0; y < nb_line; ++y) {
-        //     for (std::size_t x = 0; x < container->width; ++x) {
-        //         if (y * container->width + x < last_entity) {
-        //             if (engine::ecs::World::getInstance().isAvailableEntity(y * container->width + x)) {
-        //                 std::cout << container->red_color;
-        //                 ++used_entities;
-        //             } else
-        //                 std::cout << container->green_color;
-        //             std::cout << "#";
-        //         } else
-        //             break;
-        //     }
-        //     std::cout << std::endl;
-        // }
-
-        // std::cout << container->reset_color;
-
-        // std::cout << "Entities: " << used_entities << "/" << last_entity << std::endl;
-        // container->last_nb_line = nb_line + 1;
     }
 }

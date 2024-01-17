@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "math/vector2.hpp"
 #include "ecs/types.hpp"
 
 namespace game
@@ -16,6 +17,10 @@ namespace game
     {
         float horizontal_speed;
         float vertical_velocity;
+        engine::ecs::Entity entity;
+
+        void move_to_position(const render::math::Vector2f &position);
+        void move_to_position(float x, float y);
 
         Player(const engine::ecs::Entity &entity, std::istream &istream);
     };

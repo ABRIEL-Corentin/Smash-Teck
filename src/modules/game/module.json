@@ -7,6 +7,10 @@
         {
             "name": "game::DisplayEntitiesMemoryContainer",
             "path": "include/components/display_memory.hpp"
+        },
+        {
+            "name": "game::Tag",
+            "path": "include/components/tag.hpp"
         }
     ],
     "systems": [
@@ -17,6 +21,12 @@
         {
             "name": "game::DisplayEntitiesMemory",
             "path": "include/systems/display_memory.hpp"
+        }
+    ],
+    "functions": [
+        {
+            "name": "game::onPlayerCollisionStay",
+            "path": "include/functions/player_collisions.hpp"
         }
     ]
 }

@@ -4,8 +4,10 @@ add_library(
 
     src/components/player.cpp
     src/components/display_memory.cpp
+    src/components/tag.cpp
     src/systems/player_movement.cpp
     src/systems/display_memory.cpp
+    src/functions/player_collisions.cpp
 )
 
 target_include_directories(

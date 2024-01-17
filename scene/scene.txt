@@ -2,12 +2,13 @@ SYSTEM render::windowManager
 SYSTEM render::collisionProcess
 # SYSTEM render::fpsDisplay
 
-LOAD_SCENE scene/player.txt 100 100
+LOAD_SCENE scene/player.txt 1 100 100
 
 
 ENTITY
     render::Shape blank 0 400 800 100
     render::CollisionBox
+    game::Tag DOWN_PLATFORM
 
 # ------------------ DEBUG ------------------ #
 
