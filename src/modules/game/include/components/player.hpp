@@ -14,6 +14,9 @@ namespace game
 {
     using Player = struct Player
     {
+        float horizontal_speed;
+        float vertical_velocity;
+
         Player(const engine::ecs::Entity &entity, std::istream &istream);
     };
 }

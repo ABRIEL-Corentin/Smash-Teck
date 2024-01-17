@@ -13,5 +13,7 @@
 namespace game
 {
     Player::Player(const engine::ecs::Entity &, std::istream &)
+        : horizontal_speed(750)
+        , vertical_velocity(0)
     { }
 }

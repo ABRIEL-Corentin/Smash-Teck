@@ -14,7 +14,7 @@
 namespace render
 {
     RenderData::RenderData()
-        : m_window({1920, 1080}, "R-Type"),
+        : m_window({1920, 1080}, "Smash Teck"),
           m_animations(),
           m_textures(),
           m_shapes(),
@@ -668,6 +668,15 @@ namespace render
     void RenderData::loadResources()
     {
         loadTexture("blank", "./source/blank.png");
+        loadAnimateTexture("piranha_plant_idle", "./source/piranha-plant-idle-Sheet.png", {6, 1}, {0, 0}, {64, 64});
+        generateAnimation("piranha_plant_idle", {
+            "piranha_plant_idle_1",
+            "piranha_plant_idle_2",
+            "piranha_plant_idle_3",
+            "piranha_plant_idle_4",
+            "piranha_plant_idle_5",
+            "piranha_plant_idle_6",
+        });
     }
 
     void RenderData::loadAnimateTexture(const std::string &name, const std::string &file_name, const sf::Vector2i &nbr_of_sprite, const sf::Vector2i &position, const sf::Vector2i &size)

@@ -1,6 +1,9 @@
 SYSTEM game::playerMovement
 SYSTEM render::renderShape
+SYSTEM render::animationPlayer
 
 ENTITY
     game::Player
-    render::Shape blank 100 100 100 100 0
+    render::Shape piranha_plant_idle_1 ${0} ${1} 200 200 0
+    render::Animation piranha_plant_idle 10
+    render::CollisionBox game::onCollisionEnter game::onCollisionExit game::onCollisionStay

@@ -1,11 +1,17 @@
 SYSTEM render::windowManager
+SYSTEM render::collisionProcess
 # SYSTEM render::fpsDisplay
 
-LOAD_SCENE scene/player.txt
+LOAD_SCENE scene/player.txt 100 100
+
+
+ENTITY
+    render::Shape blank 0 400 800 100
+    render::CollisionBox
 
 # ------------------ DEBUG ------------------ #
 
-SYSTEM game::DisplayEntitiesMemory
+# SYSTEM game::DisplayEntitiesMemory
 
 ENTITY
     game::DisplayEntitiesMemoryContainer 10

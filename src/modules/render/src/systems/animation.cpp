@@ -17,7 +17,10 @@ namespace render
         engine::ecs::Components<render::Animation> &animations = engine::ecs::World::getInstance().getComponents<render::Animation>();
 
         for (std::size_t i = 0; i < shapes.size(); ++i) {
-            if (!shapes.at(i).has_value() || !animations.at(i).has_value())
+            if (!shapes.at(i).has_value())
+                continue;
+
+            if (animations.size() <= i || !animations.at(i).has_value())
                 continue;
 
             render::Shape &shape = shapes.at(i).value();

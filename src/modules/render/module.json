@@ -15,6 +15,10 @@
         {
             "name": "render::Sound",
             "path": "include/components/sound.hpp"
+        },
+        {
+            "name": "render::CollisionBox",
+            "path": "include/components/collision.hpp"
         }
     ],
     "systems": [
@@ -37,6 +41,10 @@
         {
             "name": "render::fpsDisplay",
             "path": "include/systems/fps_display.hpp"
+        },
+        {
+            "name": "render::collisionProcess",
+            "path": "include/systems/collision.hpp"
         }
     ]
 }

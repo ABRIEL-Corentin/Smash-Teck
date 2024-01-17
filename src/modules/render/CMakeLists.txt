@@ -8,10 +8,12 @@ add_library(
     src/systems/render_shape.cpp
     src/systems/animation.cpp
     src/systems/render_text.cpp
+    src/systems/collision.cpp
     src/components/shape.cpp
     src/components/animation.cpp
     src/components/text.cpp
     src/components/sound.cpp
+    src/components/collision.cpp
     src/events/keyboard.cpp
     src/events/time.cpp
     src/math/color.cpp

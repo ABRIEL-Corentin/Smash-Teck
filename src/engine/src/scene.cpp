@@ -68,7 +68,6 @@ namespace engine
         std::size_t line_index = 0;
         ecs::Entity entity = 0;
         ecs::Entities entities = ecs::Entities();
-        bool is_components = false;
 
         while (std::getline(ss, line)) {
             ++line_index;
@@ -77,47 +76,14 @@ namespace engine
 
             if (!line.size())
                 continue;
-            else if (line == "ENTITY") {
+
+            if (line == "ENTITY") {
                 entity = m_world.createEntity();
                 entities.push_back(entity);
-                is_components = true;
-                continue;
-            } else if (line == "SYSTEM") {
-                is_components = false;
                 continue;
             }
 
-            if (line.substr(0, line.find(' ')) == "LOAD_SCENE") {
-                if (line.substr(line.find(' ') + 1, line.size() - line.find(' ')) == file_name) {
-                    std::cerr << "Error infinite inclusion detected at line " << line_index << " on file: " << file_name << std::endl;
-                    Application::getInstance().close();
-                    continue;
-                }
-                std::vector<std::string> args = splitStr(line.substr(line.find(' ') + 1, line.size() - line.find(' ')));
-                std::string file = args.front();
-                args.erase(args.begin());
-                ecs::Entities loaded_entities = loadScene(file, args);
-                is_components = false;
-
-                for (auto it = loaded_entities.begin(); it != loaded_entities.end(); ++it)
-                    entities.push_back(*it);
-                continue;
-            }
-
-            if (is_components) {
-                std::istringstream data = std::istringstream();
-                std::string component_name = trimString(line.substr(0, line.find(' ')));
-
-                if (line.find(' ') != std::string::npos)
-                    data = std::istringstream(trimString(line.substr(line.find(' '), line.size() - line.find(' '))));
-
-                if (!addComponentPattern(m_world, entity, component_name, data)) {
-                    std::cout << "Failed to load scene:" << std::endl;
-                    std::cout << "Failed to add component '" << component_name << "' at line " << line_index << " on file " << file_name << " for entity " << entity << std::endl;
-                    Application::getInstance().close();
-                    return entities;
-                }
-            } else {
+            if (line.substr(0, line.find(' ')) == "SYSTEM") {
                 std::vector<std::string> args = splitStr(line.substr(line.find(' ') + 1, line.size() - line.find(' ')));
 
                 if (args.size() != 1) {
@@ -134,6 +100,36 @@ namespace engine
                     Application::getInstance().close();
                     return entities;
                 }
+                continue;
+            }
+
+            if (line.substr(0, line.find(' ')) == "LOAD_SCENE") {
+                if (line.substr(line.find(' ') + 1, line.size() - line.find(' ')) == file_name) {
+                    std::cerr << "Error infinite inclusion detected at line " << line_index << " on file: " << file_name << std::endl;
+                    Application::getInstance().close();
+                    continue;
+                }
+                std::vector<std::string> args = splitStr(line.substr(line.find(' ') + 1, line.size() - line.find(' ')));
+                std::string file = args.front();
+                args.erase(args.begin());
+                ecs::Entities loaded_entities = loadScene(file, args);
+
+                for (auto it = loaded_entities.begin(); it != loaded_entities.end(); ++it)
+                    entities.push_back(*it);
+                continue;
+            }
+
+            std::istringstream data = std::istringstream();
+            std::string component_name = trimString(line.substr(0, line.find(' ')));
+
+            if (line.find(' ') != std::string::npos)
+                data = std::istringstream(trimString(line.substr(line.find(' '), line.size() - line.find(' '))));
+
+            if (!addComponentPattern(m_world, entity, component_name, data)) {
+                std::cout << "Failed to load scene:" << std::endl;
+                std::cout << "Failed to add component '" << component_name << "' at line " << line_index << " on file " << file_name << " for entity " << entity << std::endl;
+                Application::getInstance().close();
+                return entities;
             }
         }
         return entities;
@@ -172,7 +168,6 @@ namespace engine
         try {
             parser.SetExpr(calculus);
             return std::to_string(parser.Eval());
-
         } catch (mu::Parser::exception_type &e) {
             std::cerr << "Failed to parse: " << calculus << std::endl;
             Application::getInstance().close();
