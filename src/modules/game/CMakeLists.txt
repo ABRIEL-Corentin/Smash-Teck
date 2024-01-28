@@ -5,8 +5,12 @@ add_library(
     src/components/player.cpp
     src/components/display_memory.cpp
     src/components/tag.cpp
+    src/components/destroy_timer.cpp
+    src/components/gravity.cpp
     src/systems/player_movement.cpp
     src/systems/display_memory.cpp
+    src/systems/destroy_timer.cpp
+    src/systems/gravity.cpp
     src/functions/player_collisions.cpp
 )
 

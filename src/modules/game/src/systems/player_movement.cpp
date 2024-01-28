@@ -7,6 +7,7 @@
 ////////////////////////
 
 #include "ecs/world.hpp"
+#include "application.hpp"
 #include "components/player.hpp"
 #include "components/shape.hpp"
 #include "components/tag.hpp"
@@ -73,9 +74,29 @@ namespace game
 
             offset.y = player.vertical_velocity;
             shape.move(offset * render::Time::getInstance().getDeltaTime());
+
+            if (render::Keyboard::isKeyPressedAsButton(render::Keyboard::Z) && !player.attack_cooldown_timer) {
+                engine::Application::getInstance().loadScene({
+                    "scene/attack_box.txt",
+                    {
+                        "1",
+                        std::to_string(shape.getPosition().x + 50),
+                        std::to_string(shape.getPosition().y),
+                    },
+                    nullptr
+                });
+                player.attack_cooldown_timer = player.attack_cooldown;
+            }
+
             move_player_parts(tag.tag, offset * render::Time::getInstance().getDeltaTime(), tags, shapes);
             player.vertical_velocity += GRAVITY * render::Time::getInstance().getDeltaTime();
             player.is_grounded = false;
+
+            if (player.attack_cooldown_timer)
+                player.attack_cooldown_timer -= render::Time::getInstance().getDeltaTime();
+
+            if (player.attack_cooldown_timer <= 0)
+                player.attack_cooldown_timer = 0;
         }
     }
 }

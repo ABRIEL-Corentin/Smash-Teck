@@ -11,6 +11,8 @@
 #include "events/keyboard.hpp"
 #include <iostream>
 
+#define SHOW_BORDER -5
+
 namespace render
 {
     RenderData::RenderData()
@@ -78,6 +80,11 @@ namespace render
 
         shape.setTexture(&m_textures.at(texture_id).second);
 
+        #ifdef SHOW_BORDER
+            shape.setOutlineColor(sf::Color::Red);
+            shape.setOutlineThickness(SHOW_BORDER);
+        #endif
+
         if (m_available_shapes.size()) {
             shape_id = m_available_shapes.front();
             m_available_shapes.erase(m_available_shapes.begin());
@@ -97,6 +104,11 @@ namespace render
         sf::RectangleShape shape = sf::RectangleShape();
 
         shape.setTexture(&m_textures.at(texture_id).second);
+
+        #ifdef SHOW_BORDER
+            shape.setOutlineColor(sf::Color::Red);
+            shape.setOutlineThickness(SHOW_BORDER);
+        #endif
 
         if (m_available_shapes.size()) {
             shape_id = m_available_shapes.front();

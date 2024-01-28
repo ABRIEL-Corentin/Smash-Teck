@@ -1,14 +1,15 @@
 SYSTEM render::windowManager
 SYSTEM render::collisionProcess
+SYSTEM game::gravity
 # SYSTEM render::fpsDisplay
-
-LOAD_SCENE scene/player.txt 1 (1920 / 2) 300
-
 
 ENTITY
     game::Tag DOWN_PLATFORM
     render::Shape blank (1920 / 2) 800 (1920 / 2) 100
     render::CollisionBox
+
+LOAD_SCENE scene/sandbag.txt
+LOAD_SCENE scene/player.txt 1 (1920 / 2) 300
 
 # ------------------ DEBUG ------------------ #
 

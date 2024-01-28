@@ -17,6 +17,8 @@ namespace game
     {
         float horizontal_speed;
         float vertical_velocity;
+        float attack_cooldown;
+        float attack_cooldown_timer;
         engine::ecs::Entity entity;
         bool double_jump;
         bool is_grounded;

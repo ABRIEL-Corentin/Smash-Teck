@@ -11,6 +11,14 @@
         {
             "name": "game::Tag",
             "path": "include/components/tag.hpp"
+        },
+        {
+            "name": "game::DestroyTimer",
+            "path": "include/components/destroy_timer.hpp"
+        },
+        {
+            "name": "game::Gravity",
+            "path": "include/components/gravity.hpp"
         }
     ],
     "systems": [
@@ -21,11 +29,27 @@
         {
             "name": "game::DisplayEntitiesMemory",
             "path": "include/systems/display_memory.hpp"
+        },
+        {
+            "name": "game::destroyTimer",
+            "path": "include/systems/destroy_timer.hpp"
+        },
+        {
+            "name": "game::gravity",
+            "path": "include/systems/gravity.hpp"
         }
     ],
     "functions": [
         {
             "name": "game::onPlayerCollisionStay",
+            "path": "include/functions/player_collisions.hpp"
+        },
+        {
+            "name": "game::onSandbagCollisionStag",
+            "path": "include/functions/player_collisions.hpp"
+        },
+        {
+            "name": "game::onAttackCollisionStay",
             "path": "include/functions/player_collisions.hpp"
         }
     ]

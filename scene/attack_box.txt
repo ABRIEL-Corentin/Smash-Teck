@@ -1,0 +1,11 @@
+# ${0} -> player part label
+# ${1} -> box position X
+# ${2} -> box position Y
+
+SYSTEM game::destroyTimer
+
+ENTITY
+    game::Tag PLAYER${0}_PART
+    game::DestroyTimer 0.2
+    render::Shape blank ${1} ${2} 10 10 0
+    render::CollisionBox None None game::onAttackCollisionStay

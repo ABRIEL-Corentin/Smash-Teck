@@ -17,6 +17,8 @@ namespace game
     Player::Player(const engine::ecs::Entity &entity, std::istream &)
         : horizontal_speed(750)
         , vertical_velocity(0)
+        , attack_cooldown(1)
+        , attack_cooldown_timer(attack_cooldown)
         , entity(entity)
         , double_jump(true)
         , is_grounded(false)
