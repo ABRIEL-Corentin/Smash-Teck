@@ -15,6 +15,7 @@ namespace game
     using Gravity = struct Gravity
     {
         float vertical_velocity;
+        float horizontal_velocity;
 
         Gravity(const engine::ecs::Entity &entity, std::istream &data);
     };

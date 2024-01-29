@@ -28,7 +28,10 @@ namespace game
             if (shapes.size() <= i || !shapes.at(i).has_value())
                 continue;
 
-            shapes.at(i)->move(0, gravities.at(i)->vertical_velocity * render::Time::getInstance().getDeltaTime());
+            shapes.at(i)->move(render::math::Vector2f(
+                gravities.at(i)->horizontal_velocity,
+                gravities.at(i)->vertical_velocity
+            ) * render::Time::getInstance().getDeltaTime());
             gravities.at(i)->vertical_velocity += GRAVITY_FORCE * render::Time::getInstance().getDeltaTime();
         }
     }

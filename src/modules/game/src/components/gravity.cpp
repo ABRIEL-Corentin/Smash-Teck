@@ -12,5 +12,6 @@ namespace game
 {
     Gravity::Gravity(const engine::ecs::Entity &entity, std::istream &data)
         : vertical_velocity(0)
+        , horizontal_velocity(0)
     { }
 }

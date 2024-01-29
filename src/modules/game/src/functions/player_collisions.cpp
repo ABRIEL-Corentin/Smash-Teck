@@ -72,21 +72,31 @@ namespace game
                 other_shape->getPosition().y - shape->getSize().y / 2 - other_shape->getSize().y / 2
             );
 
-            if (gravity.has_value())
+            if (gravity.has_value()) {
                 gravity->vertical_velocity = 0;
+                gravity->horizontal_velocity = 0;
+            }
         }
     }
 
     void onAttackCollisionStay(render::CollisionBox &box, render::CollisionBox &other)
     {
+        engine::ecs::Component<render::Shape> &shape = engine::ecs::World::getInstance().getComponent<render::Shape>(box.entity);
+        engine::ecs::Component<render::Shape> &other_shape = engine::ecs::World::getInstance().getComponent<render::Shape>(other.entity);
         engine::ecs::Component<Tag> &other_tag = engine::ecs::World::getInstance().getComponent<Tag>(other.entity);
         engine::ecs::Component<Gravity> &other_gravity = engine::ecs::World::getInstance().getComponent<Gravity>(other.entity);
 
-        if (!other_tag.has_value() || !other_gravity.has_value())
+        if (!shape.has_value() ||
+            !other_shape.has_value() ||
+            !other_tag.has_value() ||
+            !other_gravity.has_value())
             return;
+
+        float direction = other_shape->getPosition().x < shape->getPosition().x ? -1 : 1;
 
         if (other_tag->tag == "SANDBAG") {
             other_gravity->vertical_velocity = -1000;
+            other_gravity->horizontal_velocity = 200 * direction;
             engine::ecs::World::getInstance().destroyEntity(box.entity);
         }
     }
