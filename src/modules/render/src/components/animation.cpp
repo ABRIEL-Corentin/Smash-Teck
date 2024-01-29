@@ -38,6 +38,7 @@ namespace render
 
     void Animation::reset()
     {
+        is_playing = true;
         frame = 0;
     }
 

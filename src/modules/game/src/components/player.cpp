@@ -14,7 +14,7 @@
 
 namespace game
 {
-    Player::Player(const engine::ecs::Entity &entity, std::istream &)
+    Player::Player(const engine::ecs::Entity &entity, std::istream &data)
         : horizontal_speed(750)
         , vertical_velocity(0)
         , attack_cooldown(1)
@@ -22,7 +22,10 @@ namespace game
         , entity(entity)
         , double_jump(true)
         , is_grounded(false)
-    { }
+        , animation_state(PlayerAnimationState::IDLE)
+    {
+        data >> attack_cooldown;
+    }
 
     void Player::move_to_position(const render::math::Vector2f &position)
     {

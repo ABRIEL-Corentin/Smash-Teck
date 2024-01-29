@@ -26,6 +26,9 @@ namespace render
             render::Shape &shape = shapes.at(i).value();
             render::Animation &animation = animations.at(i).value();
 
+            if (!animation.is_playing)
+                continue;
+
             animation.timer += Time::getInstance().getDeltaTime();
 
             while (animation.timer >= 1.0f / animation.frame_rate) {
