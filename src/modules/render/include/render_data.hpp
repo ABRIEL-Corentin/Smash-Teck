@@ -34,6 +34,7 @@ namespace render
 
             // Shapes
             std::size_t getTextureID(const std::string &texture_label) const;
+            std::string getTextureLabel(std::size_t texture_id) const;
             std::size_t generateShapeWithTexture(const std::string &texture_label);
             std::size_t generateShapeWithTexture(std::size_t texture_id);
             void destroyShape(std::size_t id);

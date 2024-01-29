@@ -72,6 +72,16 @@ namespace render
         return 0;
     }
 
+    std::string RenderData::getTextureLabel(std::size_t texture_id) const
+    {
+        if (texture_id >= m_textures.size()) {
+            std::cerr << "Failed to get texture label from id: " << texture_id << std::endl;
+            return std::string();
+        }
+
+        return m_textures.at(texture_id).first;
+    }
+
     std::size_t RenderData::generateShapeWithTexture(const std::string &texture_label)
     {
         std::size_t texture_id = getTextureID(texture_label);
@@ -95,6 +105,10 @@ namespace render
             m_shapes.resize(shape_id + 1);
 
         m_shapes.at(shape_id).emplace(shape);
+
+        if (texture_label == "blank")
+            m_shapes.back()->setFillColor(sf::Color::Transparent);
+
         return shape_id;
     }
 
@@ -120,6 +134,10 @@ namespace render
             m_shapes.resize(shape_id + 1);
 
         m_shapes.at(shape_id).emplace(shape);
+
+        if (getTextureLabel(texture_id) == "blank")
+            m_shapes.back()->setFillColor(sf::Color::Transparent);
+
         return shape_id;
     }
 
@@ -688,6 +706,36 @@ namespace render
             "piranha_plant_idle_4",
             "piranha_plant_idle_5",
             "piranha_plant_idle_6",
+        });
+        loadAnimateTexture("piranha_plant_attack", "./source/piranha-plant-attack-Sheet.png", {11, 1}, {0, 0}, {64, 64});
+        generateAnimation("piranha_plant_attack", {
+            "piranha_plant_attack_1",
+            "piranha_plant_attack_2",
+            "piranha_plant_attack_3",
+            "piranha_plant_attack_4",
+            "piranha_plant_attack_5",
+            "piranha_plant_attack_6",
+            "piranha_plant_attack_7",
+            "piranha_plant_attack_8",
+            "piranha_plant_attack_9",
+            "piranha_plant_attack_10",
+            "piranha_plant_attack_11",
+        });
+        loadAnimateTexture("piranha_plant_running", "./source/piranha-plant-running-Sheet.png", {6, 1}, {0, 0}, {64, 64});
+        generateAnimation("piranha_plant_running", {
+            "piranha_plant_running_1",
+            "piranha_plant_running_2",
+            "piranha_plant_running_3",
+            "piranha_plant_running_4",
+            "piranha_plant_running_5",
+            "piranha_plant_running_6",
+        });
+        loadAnimateTexture("piranha_plant_jump", "./source/piranha-plant-jump-Sheet.png", {4, 1}, {0, 0}, {64, 64});
+        generateAnimation("piranha_plant_jump", {
+            "piranha_plant_jump_1",
+            "piranha_plant_jump_2",
+            "piranha_plant_jump_3",
+            "piranha_plant_jump_4",
         });
     }
 
