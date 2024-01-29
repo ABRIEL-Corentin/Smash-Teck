@@ -50,6 +50,19 @@ namespace render
         /// @param height new vertical size
         void setSize(float width, float height);
 
+        /// @brief Get the current scale
+        /// @return the current scale
+        math::Vector2f getScale() const;
+
+        /// @brief Define the scale of this shape
+        /// @param size new scale
+        void setScale(const math::Vector2f &scale);
+
+        /// @brief Define the scale of this shape
+        /// @param width new horizontal scale
+        /// @param height new vertical scale
+        void setScale(float width, float height);
+
         /// @brief Get the current position
         /// @return the current position
         math::Vector2f getPosition() const;

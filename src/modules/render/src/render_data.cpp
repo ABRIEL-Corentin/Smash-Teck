@@ -212,6 +212,26 @@ namespace render
         m_shapes.at(id)->setOrigin({size.x / 2, size.y / 2});
     }
 
+    math::Vector2f RenderData::shapeGetScale(std::size_t id) const
+    {
+        if (m_shapes.size() <= id || !m_shapes.at(id).has_value()) {
+            std::cerr << "Failed to get scale of shape " << id << std::endl;
+            return math::Vector2f();
+        }
+
+        return math::Vector2f(m_shapes.at(id)->getScale().x, m_shapes.at(id)->getScale().y);
+    }
+
+    void RenderData::shapeSetScale(std::size_t id, const math::Vector2f &scale)
+    {
+        if (m_shapes.size() <= id || !m_shapes.at(id).has_value()) {
+            std::cout << "Failed to update scale of shape " << id << std::endl;
+            return;
+        }
+
+        m_shapes.at(id)->setScale(scale.x, scale.y);
+    }
+
     math::Vector2f RenderData::shapeGetPosition(std::size_t id) const
     {
         if (m_shapes.size() <= id || m_shapes.at(id) == std::nullopt) {

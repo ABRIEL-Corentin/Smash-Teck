@@ -44,6 +44,8 @@ namespace render
             void shapeSetColor(std::size_t id, const math::Color &color);
             math::Vector2f shapeGetSize(std::size_t id) const;
             void shapeSetSize(std::size_t id, const math::Vector2f &size);
+            math::Vector2f shapeGetScale(std::size_t id) const;
+            void shapeSetScale(std::size_t id, const math::Vector2f &scale);
             math::Vector2f shapeGetPosition(std::size_t id) const;
             void shapeSetPosition(std::size_t id, const math::Vector2f &position);
             void shapeMove(std::size_t id, const math::Vector2f &offset);

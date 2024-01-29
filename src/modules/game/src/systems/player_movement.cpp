@@ -61,11 +61,15 @@ namespace game
             Tag &tag = tags.at(i).value();
             render::Shape &shape = shapes.at(i).value();
 
-            if (render::Keyboard::isKeyPressed(render::Keyboard::Key::Q))
+            if (render::Keyboard::isKeyPressed(render::Keyboard::Key::Q)) {
                 offset.x = -player.horizontal_speed;
+                shape.setScale(-1, 1);
+            }
 
-            if (render::Keyboard::isKeyPressed(render::Keyboard::Key::D))
+            if (render::Keyboard::isKeyPressed(render::Keyboard::Key::D)) {
                 offset.x = player.horizontal_speed;
+                shape.setScale(1, 1);
+            }
 
             if (render::Keyboard::isKeyPressedAsButton(render::Keyboard::Space) && (player.double_jump || player.is_grounded)) {
                 player.vertical_velocity = -JUMP_FORCE;

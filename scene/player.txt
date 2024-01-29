@@ -6,7 +6,7 @@ ENTITY
     game::Player
     game::Tag PLAYER${0}
     render::Shape piranha_plant_idle_1 ${1} ${2} 100 100 0
-    render::Animation piranha_plant_jump 10
+    render::Animation piranha_plant_idle 10
     # render::CollisionBox None None game::onPlayerCollisionStay
 
 ENTITY

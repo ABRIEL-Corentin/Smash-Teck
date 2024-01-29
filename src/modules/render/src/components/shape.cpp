@@ -71,6 +71,21 @@ namespace render
         setSize({width, height});
     }
 
+    math::Vector2f Shape::getScale() const
+    {
+        return RenderData::getInstance().shapeGetScale(id);
+    }
+
+    void Shape::setScale(const math::Vector2f &scale)
+    {
+        RenderData::getInstance().shapeSetScale(id, scale);
+    }
+
+    void Shape::setScale(float width, float height)
+    {
+        setScale({width, height});
+    }
+
     math::Vector2f Shape::getPosition() const
     {
         return RenderData::getInstance().shapeGetPosition(id);
