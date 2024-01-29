@@ -7,6 +7,7 @@ add_library(
     src/components/tag.cpp
     src/components/destroy_timer.cpp
     src/components/gravity.cpp
+    src/components/damage.cpp
     src/systems/player_movement.cpp
     src/systems/display_memory.cpp
     src/systems/destroy_timer.cpp

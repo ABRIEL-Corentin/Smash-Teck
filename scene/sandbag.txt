@@ -1,5 +1,6 @@
 ENTITY
-    render::Shape blank (1920 / 2 + 300) 300 50 100
+    render::Shape blank (1920 / 2 + 300) 300 75 100
     game::Gravity
     game::Tag SANDBAG
+    game::Damage
     render::CollisionBox None None game::onSandbagCollisionStag

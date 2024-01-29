@@ -19,6 +19,10 @@
         {
             "name": "game::Gravity",
             "path": "include/components/gravity.hpp"
+        },
+        {
+            "name": "game::Damage",
+            "path": "include/components/damage.hpp"
         }
     ],
     "systems": [

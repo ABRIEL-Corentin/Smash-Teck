@@ -9,6 +9,7 @@
 #include "components/player.hpp"
 #include "components/tag.hpp"
 #include "components/gravity.hpp"
+#include "components/damage.hpp"
 #include "functions/player_collisions.hpp"
 #include "ecs/world.hpp"
 
@@ -85,19 +86,22 @@ namespace game
         engine::ecs::Component<render::Shape> &other_shape = engine::ecs::World::getInstance().getComponent<render::Shape>(other.entity);
         engine::ecs::Component<Tag> &other_tag = engine::ecs::World::getInstance().getComponent<Tag>(other.entity);
         engine::ecs::Component<Gravity> &other_gravity = engine::ecs::World::getInstance().getComponent<Gravity>(other.entity);
+        engine::ecs::Component<Damage> &other_damage = engine::ecs::World::getInstance().getComponent<Damage>(other.entity);
 
         if (!shape.has_value() ||
             !other_shape.has_value() ||
             !other_tag.has_value() ||
-            !other_gravity.has_value())
+            !other_gravity.has_value() ||
+            !other_damage.has_value())
             return;
 
         float direction = other_shape->getPosition().x < shape->getPosition().x ? -1 : 1;
 
         if (other_tag->tag == "SANDBAG") {
-            other_gravity->vertical_velocity = -1000;
-            other_gravity->horizontal_velocity = 200 * direction;
+            other_gravity->vertical_velocity = -1500 * other_damage->damage - 200;
+            other_gravity->horizontal_velocity = (500 * other_damage->damage + 100) * direction;
             engine::ecs::World::getInstance().destroyEntity(box.entity);
+            other_damage->damage += 0.20;
         }
     }
 }
