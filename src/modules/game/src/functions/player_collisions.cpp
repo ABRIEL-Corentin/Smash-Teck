@@ -12,6 +12,7 @@
 #include "components/damage.hpp"
 #include "functions/player_collisions.hpp"
 #include "ecs/world.hpp"
+#include "application.hpp"
 
 namespace game
 {
@@ -100,8 +101,24 @@ namespace game
         if (other_tag->tag == "SANDBAG") {
             other_gravity->vertical_velocity = -1500 * other_damage->damage - 200;
             other_gravity->horizontal_velocity = (500 * other_damage->damage + 100) * direction;
+            other_shape->move(0, -1);
             engine::ecs::World::getInstance().destroyEntity(box.entity);
             other_damage->damage += 0.20;
         }
+    }
+
+    void spawnPlayer()
+    {
+        engine::Application::getInstance().loadScene({
+            "./scene/player.txt",
+            {"1", "(1920 / 2)", "300"}
+        });
+    }
+
+    void spawnSandbag()
+    {
+        engine::Application::getInstance().loadScene({
+            "./scene/sandbag.txt"
+        });
     }
 }

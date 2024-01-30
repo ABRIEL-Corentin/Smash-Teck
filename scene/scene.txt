@@ -1,7 +1,8 @@
 SYSTEM render::windowManager
 SYSTEM render::collisionProcess
 SYSTEM game::gravity
-# SYSTEM render::fpsDisplay
+SYSTEM game::ejection
+SYSTEM render::fpsDisplay
 
 ENTITY
     game::Tag DOWN_PLATFORM

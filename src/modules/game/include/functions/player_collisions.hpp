@@ -15,4 +15,6 @@ namespace game
     void onPlayerCollisionStay(render::CollisionBox &box, render::CollisionBox &other);
     void onSandbagCollisionStag(render::CollisionBox &box, render::CollisionBox &other);
     void onAttackCollisionStay(render::CollisionBox &box, render::CollisionBox &other);
+    void spawnPlayer();
+    void spawnSandbag();
 }

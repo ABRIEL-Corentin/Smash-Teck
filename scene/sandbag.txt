@@ -3,4 +3,5 @@ ENTITY
     game::Gravity
     game::Tag SANDBAG
     game::Damage
+    game::Ejectable game::spawnSandbag
     render::CollisionBox None None game::onSandbagCollisionStag

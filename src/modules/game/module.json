@@ -23,6 +23,10 @@
         {
             "name": "game::Damage",
             "path": "include/components/damage.hpp"
+        },
+        {
+            "name": "game::Ejectable",
+            "path": "include/components/ejectable.hpp"
         }
     ],
     "systems": [
@@ -41,6 +45,10 @@
         {
             "name": "game::gravity",
             "path": "include/systems/gravity.hpp"
+        },
+        {
+            "name": "game::ejection",
+            "path": "include/systems/ejection.hpp"
         }
     ],
     "functions": [
@@ -54,6 +62,14 @@
         },
         {
             "name": "game::onAttackCollisionStay",
+            "path": "include/functions/player_collisions.hpp"
+        },
+        {
+            "name": "game::spawnPlayer",
+            "path": "include/functions/player_collisions.hpp"
+        },
+        {
+            "name": "game::spawnSandbag",
             "path": "include/functions/player_collisions.hpp"
         }
     ]

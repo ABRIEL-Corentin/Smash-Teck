@@ -8,10 +8,12 @@ add_library(
     src/components/destroy_timer.cpp
     src/components/gravity.cpp
     src/components/damage.cpp
+    src/components/ejectable.cpp
     src/systems/player_movement.cpp
     src/systems/display_memory.cpp
     src/systems/destroy_timer.cpp
     src/systems/gravity.cpp
+    src/systems/ejection.cpp
     src/functions/player_collisions.cpp
 )
 
